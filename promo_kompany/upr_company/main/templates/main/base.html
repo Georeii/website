@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block title %}
+		{% endblock %}
+				<header>
+
+			
+			<div style="float: left; width: 25%; height: 50px;">
+				<a href="companies"><h2>Компании</h2></a>
+			</div>
+
+			<div style="float: left; width: 25%; height: 50px;">
+				<a href="People"><h2>Люди</h2></a>
+			</div>
+			<div style="float: left; width: 25%; height: 50px;">
+				<a href="personal_area"><h2>Личный кабинет</h2></a>
+			</div>
+			<div style="float: left; width: 25%; height: 50px;">
+				<a href="registration"><h2>Регистрация</h2></a>
+				<a href="entrance"><h2>Войти</h2></a>
+			</div>
+		</header>
+	</head>
+
+
+	<body>
+
+		{% block content %}
+		{% endblock%}
+		<br />
+		<br />
+		<br />
+		<br />
+		<footer>
+		<dir>
+			<h2>Спонсор: А вы их ожидали?</h2> 
+			<h2>Все права не защищены</h2>
+			<h2>Контакты: Я их не дам </h2></dir>
+		</footer>
+
+	</body>
+</html>

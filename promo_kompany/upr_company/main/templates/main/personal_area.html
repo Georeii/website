@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% block title %}
+	<title>Личный кабинет</title>
+{% endblock %}
+
+{% block content %}
+	<br />
+	<br />
+	<h2>Пользователь {{name}}</h2>
+	<p>
+		<h2>Личные данные</h2>
+		Номер телефона 
+		{{phone_number}}
+		<form name="change_phone_number" action="">
+			<input type="submit" value="Изменить">
+		</form>
+		Имя
+		{{name}}
+		<form name="change_name" action="">
+			<input type="submit" value="Изменить">
+		</form>
+		Фамилия
+		{{surname}}
+		<form name="change_surname" action="">
+			<input type="submit" value="Изменить">
+		</form>
+	</p>
+	{%endblock%}
+
