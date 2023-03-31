@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect,request
 from .models import People
 
-# # Create your views here.
 
 def entrance(response):
 	return render(response,"main/entrance.html")
 
 	
+def entrance_pr(request):
+	pass
 
 
 def registration(request):
@@ -15,6 +16,9 @@ def registration(request):
 
 
 def create(request):
+	email_pr = People.objects.get(email).count()
+	if email_pr != 0:
+		return HttpResponseRedirect("/registration")
 	if request.method == "POST":
 	    people = People()
 	    people.name = request.POST.get("name")
@@ -39,10 +43,11 @@ def personal_area(request):
 def companies(request):
 	return render(request, "main/companies.html" )
 
+def create_company(request):
+	company = Company(name_company = request.POST.get("name_company"), people = people)
+	company.save()
+
 
 
 def Peoples(request):
 	return render(request, "main/Peoples.html" )
-
-
-
