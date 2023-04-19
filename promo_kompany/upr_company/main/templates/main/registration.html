@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-			<meta charset="utf-8">
- 		 	<style>
-  			 .text {
-   			 text-align:  center;
-   			}
-  			</style>
 		<p class="text">
 			<center>
 			<form method="post" action="create/">
 				{% csrf_token %}
 				<h3>Почта</h3>
-				<input type="text" name="email" />
+				<input type="text" name="Email" />
 				<br />
 
 				<h3>Пароль</h3>
