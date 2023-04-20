@@ -9,5 +9,6 @@ urlpatterns = [
     path('People',views.People, name = 'People'),
     path('create/',views.create,),
     path('entrance_pr', views.entrance_pr)
+    path('personal_area_rt',views.personal_area(people), name = 'Personal_area')
 
 ]
