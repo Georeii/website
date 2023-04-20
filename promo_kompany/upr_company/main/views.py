@@ -2,12 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect,request,HttpResponseNotFound
 from .models import People, Company
 
-
-def entrance(response):
+# вход
+def entrance(response): #страница входа
 	return render(response,"main/entrance.html")
 
 
-def entrance_pr(request):
+def entrance_pr(request):# проверка входа
 	verified = People()
 	verified = People.objects.all()
 	verifiable_email = request.POST.get("Email")
@@ -16,21 +16,17 @@ def entrance_pr(request):
 		for i in verified: 
 			if i.Email ==  verifiable_email:
 				if  i.password == verifiable_password:
-					people = People()
-					people.Email = i.Email
-					people.password = i.password
-					people.name = i.name
-					people.surname = i.surname
+					people = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
 					return HttpResponseRedirect("/personal_area"), people
 	except:
 		return HttpResponseNotFound("<h2>Person not found</h2>")
 
-
-def registration(request):
+# регистрация
+def registration(request):# страница регистрации
 	return render(request, "main/registration.html")
 
 
-def create(request):
+def create(request):# добавления в бд
 	email_pr = People.objects.get(Email).count()
 	if email_pr != 0:
 		return HttpResponseRedirect("/registration")
@@ -43,19 +39,19 @@ def create(request):
 	    people.phone_number = request.POST.get("phone_number")
 	    people.save()
 	return HttpResponseRedirect("/personal_area")
+# 
+# личные кабинеты ----------
+def personal_area_rt(request, data):# зарегистрированый пользователь
 
-def personal_area(request):
-	try:
-		people = People()
-		Email = people.Email
-		password= people.password
-		name= people.name
-		surname=people.surname
-		data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
-		return render(request, "main/personal_area.html",data )
-	except:
-		return render(request, "main/personal_area.html" )
+	data = {'email' : email, 'password':password, 'name':name, 'surname':surname}
+	return render(request, "main/personal_area.html",data )
 
+
+def personal_area(request):# гость
+	return render(request, "main/personal_area.html" )
+# ------------------------------
+
+# 
 def companies(request):
 	return render(request, "main/companies.html" )
 
@@ -63,8 +59,9 @@ def create_company(request):
 	company = Company(name_company = request.POST.get("name_company"), people = people)
 	company.save()
 	return HttpResponseRedirect("/companies")
+# 
 
-
-
+# 
 def Peoples(request):
 	return render(request, "main/Peoples.html" )
+# 
