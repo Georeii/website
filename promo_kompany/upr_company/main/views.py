@@ -51,7 +51,7 @@ def personal_area(request):
 		password= people.password
 		name= people.name
 		surname=people.surname
-		data = {'email' : email, 'password':password, 'name':name, 'surname':surname}
+		data = {'Email' : email, 'password':password, 'name':name, 'surname':surname}
 		return render(request, "main/personal_area.html",data )
 	except:
 		return render(request, "main/personal_area.html" )
