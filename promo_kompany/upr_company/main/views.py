@@ -12,18 +12,18 @@ def entrance_pr(request):
 	verified = People.objects.all()
 	verifiable_email = request.POST.get("Email")
 	verifiable_password = request.POST.get("password")
-	try:
-		for i in verified: 
-			if i.Email ==  verifiable_email:
-				if  i.password == verifiable_password:
-					people = People()
-					people.Email = i.Email
-					people.password = i.password
-					people.name = i.name
-					people.surname = i.surname
-					return HttpResponseRedirect("/personal_area"), people
-	except:
-		return HttpResponseNotFound("<h2>Person not found</h2>")
+	# try:
+	for i in verified: 
+		if i.Email ==  verifiable_email:
+			if  i.password == verifiable_password:
+				people = People()
+				people.Email = i.Email
+				people.password = i.password
+				people.name = i.name
+				people.surname = i.surname
+				return  HttpResponseRedirect("/personal_area")
+	# except:
+	# 	return HttpResponseNotFound("<h2>Person not found</h2>")
 
 
 def registration(request):
@@ -45,16 +45,13 @@ def create(request):
 	return HttpResponseRedirect("/personal_area")
 
 def personal_area(request):
-	try:
-		people = People()
-		Email = people.Email
-		password= people.password
-		name= people.name
-		surname=people.surname
-		data = {'email' : email, 'password':password, 'name':name, 'surname':surname}
-		return render(request, "main/personal_area.html",data )
-	except:
-		return render(request, "main/personal_area.html" )
+	people = People()
+	Email = people.Email
+	password= people.password
+	name= people.name
+	surname=people.surname
+	data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
+	return render(request, "main/personal_area.html",data )
 
 def companies(request):
 	return render(request, "main/companies.html" )
