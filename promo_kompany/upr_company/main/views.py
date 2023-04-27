@@ -45,7 +45,6 @@ def create(request):
 	return HttpResponseRedirect("/personal_area")
 
 def personal_area(request):
-<<<<<<< HEAD
 	people = People()
 	Email = people.Email
 	password= people.password
@@ -53,18 +52,7 @@ def personal_area(request):
 	surname=people.surname
 	data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
 	return render(request, "main/personal_area.html",data )
-=======
-	try:
-		people = People()
-		Email = people.Email
-		password= people.password
-		name= people.name
-		surname=people.surname
-		data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
-		return render(request, "main/personal_area.html",data )
-	except:
-		return render(request, "main/personal_area.html" )
->>>>>>> de5b60869917c8a079f9ac829ec9248e10b806b4
+
 
 def companies(request):
 	return render(request, "main/companies.html" )
@@ -76,5 +64,7 @@ def create_company(request):
 
 
 
-def Peoples(request):
+def peoples(request):
+	person = People()
+	person = People.objects.all()
 	return render(request, "main/Peoples.html" )
