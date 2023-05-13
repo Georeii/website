@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% block title %}<title>Отсчет</title>{% endblock %}
+
+
+{% block content %}
+
+	<table>
+		<thead>
+			<th>Дом</th> <th>квартира</th> <th>откыли/Не открыли<br /> (1- открыли, 0-Не открыли) </th> <th>Реакция <br />(0-Негативно <br /> 1-Нейтрально <br /> 2-Положительно ) </th> <th></th>
+		</thead>
+		{% for hom  in Home %}
+		{% for i  in range(1, hom.col_apartment %)}
+		<tr>
+			<td>{{hom.city}},{{hom.street}},{{hom.num_home}}</td>
+			<td>{{i}}</td>
+			{{if Bypass_result.count(hom.id,{i}) != 1}}
+			<form method="post" action="">
+				<td> <input type="text" name="open_close" /> </td>
+				<td> <input type="text" name="reaction" /> </td>
+				<td> <input type="submit" value="добавить" /> </td>
+			{{endif}}
+			</form>
+		</tr>
+
+
+	</table>
+
+
+{% endblock %}

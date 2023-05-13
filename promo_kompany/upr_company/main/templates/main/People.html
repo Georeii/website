@@ -2,3 +2,17 @@
 {% block title %}
 	<title>Люди</title>
 {% endblock %}
+{% block content %}
+	{% if person.count != 0 %}
+		{% for people in person %}
+			<table>
+				<thead><th>Id</th><th>Имя</th><th>Возраст</th><th></th></thead>
+				<tr>
+					<td>{{ person.id }}</td>
+					<td>{{ person.name }}</td>
+					<td>{{ person.age }}</td>
+				</tr>
+			</table>
+		{% endfor %}
+	{% endif %}
+{% endblock %}

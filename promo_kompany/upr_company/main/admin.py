@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import People, Company, Bypass_result, Home
-
-admin.site.register(People)
+from .models import  Company, Bypass_result, Home
+# admin.site.register(People)
 
 admin.site.register(Company)
 

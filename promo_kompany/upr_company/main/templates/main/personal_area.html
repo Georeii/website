@@ -6,24 +6,29 @@
 {% block content %}
 	<br />
 	<br />
-	<h2>Пользователь {{name}}</h2>
+	<h2>привет {{ user.username|default:'гость' }}</h2>
 	<p>
 		<h2>Личные данные</h2>
-		Номер телефона 
-		{{phone_number}}
-		<form name="change_phone_number" action="">
-			<input type="submit" value="Изменить">
-		</form>
 		Имя
-		{{name}}
-		<form name="change_name" action="">
+		{{user.first_name}}
+		<form name="firstname " action="">
 			<input type="submit" value="Изменить">
 		</form>
 		Фамилия
-		{{surname}}
-		<form name="change_surname" action="">
+		{{user.last_name}}
+		<form name="lastname " action="">
 			<input type="submit" value="Изменить">
 		</form>
+		Email {{user.email}}
+		<form name="email " action="">
+			<input type="submit" value="Изменить">
+		</form>
+		<br />
+
+		<form name="password " action="accounts\password_change">
+			<input type="submit" value="Изменить пароль">
+		</form>
+
 	</p>
 	{%endblock%}
 

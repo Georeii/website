@@ -1,70 +1,23 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect,request,HttpResponseNotFound
-from .models import People, Company
+from django.shortcuts import render,redirect
+from django.http import request,HttpResponseNotFound,HttpResponseRedirect
+
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from .models import Company
 
 
-def entrance(response):
-	return render(response,"main/entrance.html")
 
+class SignUp(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/registration.html"
 
-def entrance_pr(request):
-	verified = People()
-	verified = People.objects.all()
-	verifiable_email = request.POST.get("Email")
-	verifiable_password = request.POST.get("password")
-	# try:
-	for i in verified: 
-		if i.Email ==  verifiable_email:
-			if  i.password == verifiable_password:
-				people = People()
-				people.Email = i.Email
-				people.password = i.password
-				people.name = i.name
-				people.surname = i.surname
-				return  HttpResponseRedirect("/personal_area")
-	# except:
-	# 	return HttpResponseNotFound("<h2>Person not found</h2>")
-
-
-def registration(request):
-	return render(request, "main/registration.html")
-
-
-def create(request):
-	email_pr = People.objects.get(Email).count()
-	if email_pr != 0:
-		return HttpResponseRedirect("/registration")
-	elif request.method == "POST":
-	    people = People()
-	    people.name = request.POST.get("name")
-	    people.Email = request.POST.get("Email")
-	    people.password = request.POST.get("password")
-	    people.surname = request.POST.get("surname")
-	    people.phone_number = request.POST.get("phone_number")
-	    people.save()
-	return HttpResponseRedirect("/personal_area")
 
 def personal_area(request):
-<<<<<<< HEAD
-	people = People()
-	Email = people.Email
-	password= people.password
-	name= people.name
-	surname=people.surname
-	data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
-	return render(request, "main/personal_area.html",data )
-=======
-	try:
-		people = People()
-		Email = people.Email
-		password= people.password
-		name= people.name
-		surname=people.surname
-		data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
-		return render(request, "main/personal_area.html",data )
-	except:
-		return render(request, "main/personal_area.html" )
->>>>>>> de5b60869917c8a079f9ac829ec9248e10b806b4
+	return render(request, "main/personal_area.html")
+
+
 
 def companies(request):
 	return render(request, "main/companies.html" )
