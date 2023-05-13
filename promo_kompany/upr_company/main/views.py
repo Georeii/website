@@ -16,8 +16,18 @@ class SignUp(CreateView):
 
 
 def personal_area(request):
+<<<<<<< HEAD
 	return render(request, "main/personal_area.html")
 
+=======
+	people = People()
+	Email = people.Email
+	password= people.password
+	name= people.name
+	surname=people.surname
+	data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
+	return render(request, "main/personal_area.html",data )
+>>>>>>> 948e595a3b4c89cff48d883a75f8df1c3029a44f
 
 
 def companies(request):
@@ -30,5 +40,7 @@ def create_company(request):
 
 
 
-def Peoples(request):
+def peoples(request):
+	person = People()
+	person = People.objects.all()
 	return render(request, "main/Peoples.html" )
