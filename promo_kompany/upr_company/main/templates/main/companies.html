@@ -2,3 +2,41 @@
 {% block title %}
 	<title>Компании</title>
 {% endblock %}
+{% block content %}
+{% if user.is_authenticated  %}
+	<div>
+		<h2>Создать компанию</h2>
+		<form method="post" action="" >
+			<input type="text" name="name_company">
+			<input type="submit" name="Создать">
+		</form>
+	</div>
+
+	<div>
+		<table>
+			<thead> <th>id компании</th> <th>Имя компании</th>  <th></th> <th></th> <th></th> </thead>
+
+			{% for compan  in Company %}
+			<tr>
+				<td>{{ compan.id }} </td>
+				<td>{{ compan.name_company }}</td>
+				<td><a href="/{{ compan.id }}">Добавить дом</a></td>
+				<td><a href="/{{compan.id}}">Заполнить отсчет</a></td>
+				<td> добавить человека <br />
+					<form method="post">
+						<input type="text" name="people_id">
+						<input type="submit" name="добавить">
+					</form>
+				</td>
+			</tr>
+			{%endfor%}
+		</table>
+
+	</div>
+{% else %}
+	<h1><a href="/accounts/login">Войдите</a> чтобы упровлять компаниями</h1>
+{%endif%}
+
+
+
+{% endblock %}
