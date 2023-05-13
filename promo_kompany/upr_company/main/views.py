@@ -4,7 +4,6 @@ from django.http import request,HttpResponseNotFound,HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-
 from .models import Company
 
 
@@ -16,18 +15,8 @@ class SignUp(CreateView):
 
 
 def personal_area(request):
-<<<<<<< HEAD
 	return render(request, "main/personal_area.html")
 
-=======
-	people = People()
-	Email = people.Email
-	password= people.password
-	name= people.name
-	surname=people.surname
-	data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
-	return render(request, "main/personal_area.html",data )
->>>>>>> 948e595a3b4c89cff48d883a75f8df1c3029a44f
 
 
 def companies(request):
@@ -40,7 +29,5 @@ def create_company(request):
 
 
 
-def peoples(request):
-	person = People()
-	person = People.objects.all()
+def Peoples(request):
 	return render(request, "main/Peoples.html" )
