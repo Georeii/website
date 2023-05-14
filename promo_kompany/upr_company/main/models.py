@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 
 
 class Company(models.Model):
-	User = models.ManyToManyField(User)
+	users = models.ManyToManyField(User)
 	name_company = models.CharField(max_length=50)
+
 
 
 class Home(models.Model):

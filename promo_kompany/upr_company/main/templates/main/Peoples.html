@@ -3,14 +3,14 @@
 	<title>Люди</title>
 {% endblock %}
 {% block content %}
-	{% if person.count != 0 %}
-		{% for people in person %}
+	{% if users.count != 0 %}
+		{% for person in users %}
 			<table>
-				<thead><th>Id</th><th>Имя</th><th>Возраст</th><th></th></thead>
+				<thead><th>Id</th><th>Имя</th><th>Фамилия</th><th></th></thead>
 				<tr>
 					<td>{{ person.id }}</td>
-					<td>{{ person.name }}</td>
-					<td>{{ person.age }}</td>
+					<td>{{ person.first_name }}</td>
+					<td>{{ person.last_name }}</td>
 				</tr>
 			</table>
 		{% endfor %}
