@@ -3,8 +3,13 @@ from django.contrib.auth.models import User
 
 
 class Company(models.Model):
+<<<<<<< HEAD
 	User = models.ManyToManyField(User)
+=======
+	users = models.ManyToManyField(User)
+>>>>>>> main
 	name_company = models.CharField(max_length=50)
+
 
 
 class Home(models.Model):

@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% block title %}
+	<title>Люди</title>
+{% endblock %}
+{% block content %}
+	{% if users.count != 0 %}
+		{% for person in users %}
+			<table>
+				<thead><th>Id</th><th>Имя</th><th>Фамилия</th><th></th></thead>
+				<tr>
+					<td>{{ person.id }}</td>
+					<td>{{ person.first_name }}</td>
+					<td>{{ person.last_name }}</td>
+				</tr>
+			</table>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
