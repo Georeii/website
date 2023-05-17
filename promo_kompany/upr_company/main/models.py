@@ -9,7 +9,7 @@ class Company(models.Model):
 
 
 class Home(models.Model):
-	Company = models.ManyToManyField("Company")
+	company = models.ManyToManyField("Company")
 	city = models.TextField()
 	street = models.TextField()
 	num_home = models.CharField(max_length=10)
@@ -17,7 +17,6 @@ class Home(models.Model):
 
 
 class Bypass_result(models.Model):
-	Company = models.ForeignKey(Company, on_delete=models.CASCADE )
 	home = models.ForeignKey(Home, on_delete=models.CASCADE )
 	apartment = models.FloatField()
 	open_close = models.FloatField()

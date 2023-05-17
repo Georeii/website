@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% block title %}
+	<title>Добавить дом</title>
+{% endblock %}
+{% block content %}
+	<table>
+		<thead>	
+			<th> <h2> Город </h2> </th>
+			<th> <h2> Улица </h2> </th>
+			<th> <h2> Номер дома </h2> </th>
+			<th> <h2> коливество квартир <br /> (если дом частный то введите 1)</h2> </th>
+		</thead>
+
+		<form method="post" action="/app_home/{{id}}/">
+			{% csrf_token %}
+			<tr>
+				<td> <input type="text" name="city" /> </td>
+				<td> <input type="text" name="street" /> </td>
+				<td> <input type="text" name="num_home" /> </td>
+				<td> <input type="text" name="col_apartment" /> </td>
+				<td> <input type="submit" name="добавить"> </td> 
+			</tr>
+		</form>
+		{% if homes.count != 0 %}
+			{% for home  in homes %}
+				<tr>
+					<td>{{home.id}}</td>
+					<td>{{home.city}}</td>
+					<td>{{home.street}}</td>
+					<td>{{home.num_home}}</td>
+					<td>{{home.col_apartment}}</td>
+				</tr>
+			{%endfor%}
+		{% endif %}
+	</table>
+{% endblock %}

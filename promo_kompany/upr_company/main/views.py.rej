@@ -1,0 +1,32 @@
+diff a/promo_kompany/upr_company/main/views.py b/promo_kompany/upr_company/main/views.py	(rejected hunks)
+@@ -39,19 +39,19 @@
+ 	    people.phone_number = request.POST.get("phone_number")
+ 	    people.save()
+ 	return HttpResponseRedirect("/personal_area")
++# 
++# личные кабинеты ----------
++def personal_area_rt(request, data):# зарегистрированый пользователь
+ 
+-def personal_area(request):
+-	try:
+-		people = People()
+-		Email = people.Email
+-		password= people.password
+-		name= people.name
+-		surname=people.surname
+-		data = {'Email' : Email, 'password':password, 'name':name, 'surname':surname}
+-		return render(request, "main/personal_area.html",data )
+-	except:
+-		return render(request, "main/personal_area.html" )
++	data = {'email' : email, 'password':password, 'name':name, 'surname':surname}
++	return render(request, "main/personal_area.html",data )
+ 
++
++def personal_area(request):# гость
++	return render(request, "main/personal_area.html" )
++# ------------------------------
++
++# 
+ def companies(request):
+ 	return render(request, "main/companies.html" )
+ 
