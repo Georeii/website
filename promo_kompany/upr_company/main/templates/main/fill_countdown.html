@@ -3,31 +3,71 @@
 
 
 {% block content %}
+	{% if user.is_authenticated  %}
+	<form method="post" action="/fill_countdown_create/{{id}}/">
+		{% csrf_token %}
+		<table>
+			<thead>
+				<th>id Дом</th> <th>квартира</th> <th>(Не) открыли<br /> (1- открыли,<br /> 0-Не открыли) </th> <th>Реакция <br />(0-Негативно <br /> 1-Нейтрально <br /> 2-Положительно ) </th>
+			</thead>
+			<tr>
+				<td> <input type="text" name="home_id" /> </td>
+				<td> <input type="text" name="apartment" /> </td>
+				<td> <input type="text" name="un_open" /> </td>
+				<td> <input type="text" name="reaction" /> </td>
+				<td> <input type="submit", value="Добавить осчет" /> </td>
+			</tr>
+		</table>
+	</form>
+	
+	<br />
+	<br />
+	<br />
+	{% if Bypass_result.count != 0 %}
+	<dif style="float: left; width: 50%; height: 50px;">
+		<table>
+			<thead>
+				<th>id дома</th>
+				<th>Квартира</th>
+				<th>(Не) открыли<br /> (1- открыли,<br /> 0-Не открыли)</th>
+				<th>Реакция <br />(0-Негативно <br /> 1-Нейтрально <br /> 2-Положительно ) </th>
 
+			</thead>
+			{% for Bypass_result in  Bypass_results%}
+				<tr>
+					<td>{{ Bypass_result.home.id }} </td>
+					<td>{{ Bypass_result.apartment }} </td>
+					<td>{{ Bypass_result.open_close }} </td>
+					<td>{{ Bypass_result.reaction }} </td>
+
+
+				</tr>
+			{% endfor %}
+		</table>
+	</dif>
+	{% endif %}
+
+
+	<div style="float: left; width: 50%; height: 50px;">
 	<table>
 		<thead>
-			<th>Дом</th> <th>квартира</th> <th>откыли/Не открыли<br /> (1- открыли, 0-Не открыли) </th> <th>Реакция <br />(0-Негативно <br /> 1-Нейтрально <br /> 2-Положительно ) </th> <th></th>
+			<th>id</th>
+			<th>Город</th>
+			<th>Улица</th>
+			<th>Номер дома</th>
+			<th>Количество квартиров</th>
 		</thead>
-		{% for hom  in Home %}
-		{% for i  in range(1, hom.col_apartment %)}
-		<tr>
-			<td>{{hom.city}},{{hom.street}},{{hom.num_home}}</td>
-			<td>{{i}}</td>
-			{{if Bypass_result.count(hom.id,{i}) != 1}}
-<<<<<<< HEAD
-			<form method="post" action="">
-=======
-			<form method="post" action="fill_countdown_create">
->>>>>>> main
-				<td> <input type="text" name="open_close" /> </td>
-				<td> <input type="text" name="reaction" /> </td>
-				<td> <input type="submit" value="добавить" /> </td>
-			{{endif}}
-			</form>
-		</tr>
-
-
+		{% for home in Homes %}
+			<tr>
+				<td>{{ home.id }}</td>
+				<td>{{ home.city }}</td>
+				<td>{{ home.street }}</td>
+				<td>{{ home.num_home }}</td>
+				<td>{{ home.col_apartment }}</td>
+			</tr>
+		{% endfor %}
 	</table>
-
+	</div>
+	{% endif %}
 
 {% endblock %}
