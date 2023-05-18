@@ -29,21 +29,23 @@ def companies(request):
 	return render(request, "main/companies.html", {"company":company} )
 
 
-def create_company(request):
-	company = Company(name_company = request.POST.get("name_company"), people = people)
+def create_company(request,id):
+	company = Company()
+	company.name_company = request.POST.get("name_company")
 	company.save()
+	company.users.add(id)
 	return HttpResponseRedirect("/companies")
+
+
+def change_company(request, id):
+	company = Company.get(id)
+	company.users.add(request.POST.get("people_id"))
 # ---------------------------------------------------
 
 
 def create_home(request,id):
-	try:
-		homes = Home.objects.get(company =id)
-		return render(request, "main/create_home.html", {"id" : id,"homes":homes})
-	except:
-		return render(request, "main/create_home.html", {"id" : id})
-
-
+	homes = Home.objects.filter(company =id)
+	return render(request, "main/create_home.html", {"id" : id,"homes":homes})
 
 
 def app_home(request,idr):
@@ -53,20 +55,18 @@ def app_home(request,idr):
 		homes.street= request.POST.get("street")
 		homes.num_home = request.POST.get("num_home")
 		homes.col_apartment = request.POST.get("col_apartment")
-		company = Company.objects.filter(id=idr)
-		homes.company.set(company)  
+		homes.save() 
+		homes.company.add(idr)
 	return HttpResponseRedirect(f"/create_home/{idr}/")
 
 
 # -----------------------------------------------------
 def fill_countdown(request,id):
 	hm = Home.objects.filter(company = id)
-	dr = Bypass_result.objects.all()
-	# dr = []
-	# try:
-	# 	for i in dr_no:
-	# 		if i in hm.id:
-	# 			br.append(i)
+	dr = []
+	for i in hm:
+		dr += Bypass_result.objects.filter(home = i)
+		
 	return render(request, "main/fill_countdown.html", {'Bypass_results':dr,"Homes":hm,"id" : id})
 	# except:
 	# return render(request, "main/fill_countdown.html", {"Homes":hm,"id" : id})
@@ -75,9 +75,7 @@ def fill_countdown(request,id):
 
 def fill_countdown_create(request,id):
 	if request.method == "POST":
-		h = Home()
 		br = Bypass_result()
-		# brid = 
 		br.home_id = request.POST.get('home_id')
 		br.apartment = request.POST.get("apartment")
 		br.open_close = request.POST.get("un_open")

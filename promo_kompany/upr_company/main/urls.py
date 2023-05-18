@@ -9,7 +9,8 @@ urlpatterns = [
     # -----------------------------
     # компании
     path('companies',views.companies, name = 'Companies'),
-    path('create_company',views.create_company, name = 'Сreate_company'),
+    path('create_company/<int:id>/',views.create_company, name = 'Сreate_company'),
+    path('change_company/<int:id>/',views.change_company, name = 'Change_company'),
    # -------------------------------
     path("create_home/<int:id>/",views.create_home, name ="create_home"),
     path("app_home/<int:idr>/",views.app_home, name = "app_home"),

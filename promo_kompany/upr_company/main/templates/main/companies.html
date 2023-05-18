@@ -6,7 +6,8 @@
 {% if user.is_authenticated  %}
 	<div>
 		<h2>Создать компанию</h2>
-		<form method="post" action="" >
+		<form method="post" action="create_company/{{ user.id}}/" >
+			{% csrf_token %}
 			<input type="text" name="name_company">
 			<input type="submit" name="Создать">
 		</form>
@@ -16,13 +17,14 @@
 		<table>
 			<thead> <th>id компании</th> <th>Имя компании</th>  <th></th> <th></th> <th></th> </thead>
 			{% for compan  in company %}
+
 			<tr>
 				<td>{{ compan.id }} </td>
 				<td>{{ compan.name_company }}</td>
 				<td><a href="create_home/{{ compan.id }}/">Добавить дом</a></td>
 				<td><a href="fill_countdown/{{compan.id}}">Заполнить отсчет</a></td>
 				<td> добавить человека <br />
-					<form method="post">
+					<form method="post" action="change_company/{{ compan.id}}/">
 						{% csrf_token %}
 						<input type="text" name="people_id">
 						<input type="submit" name="добавить">

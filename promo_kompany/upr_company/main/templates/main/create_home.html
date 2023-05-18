@@ -21,16 +21,23 @@
 				<td> <input type="submit" name="добавить"> </td> 
 			</tr>
 		</form>
-		{% if homes.count != 0 %}
-			{% for home  in homes %}
-				<tr>
-					<td>{{home.id}}</td>
-					<td>{{home.city}}</td>
-					<td>{{home.street}}</td>
-					<td>{{home.num_home}}</td>
-					<td>{{home.col_apartment}}</td>
-				</tr>
-			{%endfor%}
-		{% endif %}
+	</table>
+	<table>
+		<thead>	
+			<th> <h2> id </h2> </th>
+			<th> <h2> Город </h2> </th>
+			<th> <h2> Улица </h2> </th>
+			<th> <h2> Номер дома </h2> </th>
+			<th> <h2> коливество квартир</h2> </th>
+		</thead>
+		{% for home  in homes %}
+		<tr>
+			<td>{{home.id}}</td>
+			<td>{{home.city}}</td>
+			<td>{{home.street}}</td>
+			<td>{{home.num_home}}</td>
+			<td>{{home.col_apartment}}</td>
+		</tr>
+		{%endfor%}
 	</table>
 {% endblock %}
